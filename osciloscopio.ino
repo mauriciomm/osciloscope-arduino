@@ -60,12 +60,12 @@ void loop(void) {
     //limpando a tela
     tft.fillScreen(WHITE);
 
-    const int SEPARATOR = 20;
+    const int SEPARE = 20;
 
-    for(int y = 0; y <= tft.height(); y += SEPARATOR)
+    for(int y = 0; y <= tft.height(); y += SEPARE)
       tft.drawLine(0, y, tft.width(), y, BLACK);
     
-    for(int x = 0; x < tft.width(); x += SEPARATOR)
+    for(int x = 0; x < tft.width(); x += SEPARE)
       tft.drawLine(x, 0, x, tft.height(), BLACK);
     
     tensao = analogRead(A5)*5.0/1023.0;
@@ -74,7 +74,7 @@ void loop(void) {
     float x1, y1;
 
     x0 = 0;
-    y0 = ((tensao * 100) / 5.0) + 100;
+    y0 = 200 - ((tensao * 100) / 5.0);
 
     //enviando para o console da leitura obtida
     Serial.print(x0);
@@ -88,12 +88,12 @@ void loop(void) {
         tensao = analogRead(A5)*5.0/1023.0;
 
         x1 = (tft.width()*i)/DIVISION;
-        y1 = ((tensao * 100) / 5.0) + 100;
+        y1 = 200 - ((tensao * 100) / 5.0);
 
-        tft.drawLine(x0, y0, x1, y1, RED);
+        tft.drawLine(x0, y0, x1, y1, BLUE);
 
         Serial.print(x1);
-        Serial.print(",");
+        Serial.print(","); 
         Serial.println(tensao);
         x0 = x1;
         y0 = y1;
